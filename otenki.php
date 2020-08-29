@@ -27,15 +27,18 @@ foreach ($client->parseEvents() as $event) { switch ($event['type']) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                    $client->replyMessage([
+					if (strpos($message['text'], '天気') !== false) {
+						$rep = 'http://weather.yahoo.co.jp/weather/';
+					}
+                    $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
-                        'messages' => [
-                            [
+                        'messages' => array(
+                           array(
                                 'type' => 'text',
-                                'text' => $message['text']
-                            ]
-                        ]
-                    ]);
+                                'text' => $rep
+							)
+						)
+					));
                     break;
                 default:
                     error_log('Unsupported message type: ' . $message['type']);
