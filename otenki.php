@@ -47,3 +47,4 @@ foreach ($client->parseEvents() as $event) { switch ($event['type']) {
             break;
     }
 };
+?>
